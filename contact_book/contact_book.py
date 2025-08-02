@@ -49,10 +49,27 @@ class ContactBook:
         self.console.print(table)
 
     def remove_contact(self):
-        pass
+        search = input("Search: ").strip().lower()
+        for i in self.db.get_contacts():
+            if i.name == search:
+                self.db.contacts.remove(i)
+                self.db.save_contacts()
+                self.console.print(f"[bold red]Contact {i.name} o'chirildi")        
+                return
+                
 
     def update_contact(self):
-        pass
+        search = input("Search: ").strip().lower()
+        for i in self.db.get_contacts():
+            if i.name == search:
+                self.console.print("[bold green]Update Contact Information")
+                name = input("Name: ").strip().title()
+                phone = input("Phone: ").strip()
+                email = input("Email: ").strip()
+
+                self.db.update_contact(i.contact_id, name, phone, email)
+                self.console.print(f"[bold blue]Contact {i.name} yangilandi[/bold blue]")
+                return
 
     def search_contact(self):
         search = input("Search: ").strip().lower()
@@ -87,3 +104,10 @@ class ContactBook:
                 self.print_contacts()
             elif choice == '3':
                 self.search_contact()
+            elif choice == '4':
+                self.update_contact()
+            elif choice == '5':
+                self.remove_contact()
+            elif choice == '6':
+                self.console.print("[bold red]dastur tugadi[/bold red]")
+                break
