@@ -50,24 +50,26 @@ class ContactBook:
 
     def remove_contact(self):
         search = input("Search: ").strip().lower()
-        for i in self.db.get_contacts():
-            if i.name.lower() == search:
-                self.db.contacts.remove(i)
-                self.db.save_contacts()
-                self.console.print(f"[bold red]Contact {i.name} o'chirildi")        
-                return
+        if self.db.remove_contact(search):
+            print("uchirildi")
+            
                 
 
     def update_contact(self):
         search = input("Search: ").lower()
+        contact = self.db.get_contacts(name)
         for i in self.db.get_contacts():
             if i.name.lower() == search:
                 self.console.print("[bold green]Update Contact Information")
                 name = input("Name: ").strip().title()
                 phone = input("Phone: ").strip()
                 email = input("Email: ").strip()
-
-                self.db.update_contact(i.contact_id, name, phone, email)
+                data = {
+                    'name': name,
+                    'phone': phone,
+                    'email': email
+                }
+                self.db.update_contact(contact, data)
                 self.console.print(f"[bold blue]Contact {i.name} yangilandi[/bold blue]")
                 return
 

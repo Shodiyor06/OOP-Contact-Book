@@ -32,3 +32,23 @@ class DB:
     def get_contacts(self):
         self.load_contacts()
         return self.contacts
+    
+    def update_contact(self,contact: Contact, data):
+       for i in self.contacts:
+           if i.name == contact.name:
+                i.name = data.get("name")
+                i.phone = data.get("phone")
+                i.email = data.get("email")
+       self.save_contacts()
+    
+    def remove_contact(self, search):
+        contact = self.get_contacts(search)
+
+        if contact:
+            self.contacts.remove(contact)
+            self.save_contacts()
+            return True
+        else:
+            return False
+           
+
