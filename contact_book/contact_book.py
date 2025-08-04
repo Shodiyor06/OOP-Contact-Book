@@ -59,9 +59,9 @@ class ContactBook:
                 
 
     def update_contact(self):
-        search = input("Search: ").strip().lower()
+        search = input("Search: ").lower()
         for i in self.db.get_contacts():
-            if i.name == search:
+            if i.name.lower() == search:
                 self.console.print("[bold green]Update Contact Information")
                 name = input("Name: ").strip().title()
                 phone = input("Phone: ").strip()
