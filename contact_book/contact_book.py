@@ -51,7 +51,7 @@ class ContactBook:
     def remove_contact(self):
         search = input("Search: ").strip().lower()
         for i in self.db.get_contacts():
-            if i.name == search:
+            if i.name.lower() == search:
                 self.db.contacts.remove(i)
                 self.db.save_contacts()
                 self.console.print(f"[bold red]Contact {i.name} o'chirildi")        
